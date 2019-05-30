@@ -1,2 +1,33 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<h1 class="text-center">🍿 Moovie or not moovie 🍿</h1>
+
+<%= form_tag root_path, method: :get do %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control my-3",
+    placeholder: "Find both movies & series"
+  %>
+<% end %>
+
+<div class="row">
+  <div class="col-sm-8">
+    <div>
+      <% @results.present? && @results.each do |result| %>
+        <% if result.searchable_type == 'Movie' %>
+          <% movie = result.searchable %>
+          <!-- show movie with director -->
+          <h4>
+            <%= movie.title %> (Dir: <%= movie.director.first_name %> <%= movie.director.last_name %>)
+          </h4>
+          <p><%= movie.syllabus %></p>
+        <% else %>
+          <!-- show series without director  -->
+          <% serie = result.searchable %>
+          <h4>
+            <%= serie.title %>
+          </h4>
+          <p><%= serie.syllabus %></p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

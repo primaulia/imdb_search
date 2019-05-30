@@ -1,0 +1,22 @@
+<h1 class="text-center">Moovie it is 🍿</h1>
+
+<%= form_tag movies_path, method: :get do %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control my-3",
+    placeholder: "Find a movie"
+  %>
+<% end %>
+
+<div class="row">
+  <div class="col-sm-8">
+    <div class="movies">
+      <% @movies.each do |movie| %>
+        <h4>
+          <%= movie.title %> (Dir: <%= movie.director.first_name %> <%= movie.director.last_name %>)
+        </h4>
+        <p><%= movie.syllabus %></p>
+      <% end %>
+    </div>
+  </div>
+</div>
